@@ -13,9 +13,18 @@ import {
   Group,
   Table,
   ActionIcon,
+  Badge,
+  Breadcrumbs,
+  Anchor,
+  Tooltip,
+  Pagination,
   useMantineTheme
 } from "@mantine/core"
 import { BsFillArrowRightCircleFill } from "react-icons/bs"
+import { MdElderly, MdOutlineAccessible } from "react-icons/md"
+import { GiHealthNormal, GiLifeTap } from "react-icons/gi"
+import { BsChevronRight } from "react-icons/bs"
+import { FaArrowCircleUp } from "react-icons/fa"
 import { useTranslation } from "react-i18next"
 import MainLink from "./components/MainLink"
 import navbarContent from "./navbarContent"
@@ -26,6 +35,56 @@ export default function Home() {
   const { t: getTranslation } = useTranslation()
   const theme = useMantineTheme()
   const [navbarTarget, setNavbarTarget] = useState({})
+
+  const items = [
+    { title: getTranslation("navbar.dashboard"), href: '#' },
+    { title: getTranslation("dashboard.processesAwaiting.title"), href: '#' }
+  ].map((item, index) => (
+    <Anchor href={item.href} key={index}>
+      {item.title}
+    </Anchor>
+  ))
+
+  const getModifier = name => {
+    const color = theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black
+    return {
+      oldPerson:
+        <Tooltip
+          label={getTranslation("process.modifiers.elderlyCitizen")}
+          withArrow
+        >
+          <MdElderly color={color} size={20} />
+        </Tooltip>,
+      healthCondition:
+        <Tooltip
+          label={getTranslation("process.modifiers.healthCondition")}
+          withArrow
+        >
+          <GiHealthNormal color={color} size={20} />
+        </Tooltip>,
+      lifeDanger:
+        <Tooltip
+          label={getTranslation("process.modifiers.lifeRisk")}
+          withArrow
+        >
+          <GiLifeTap color={color} size={20} />
+        </Tooltip>,
+      priority:
+        <Tooltip
+          label={getTranslation("process.modifiers.needPriority")}
+          withArrow
+        >
+          <FaArrowCircleUp color={color} size={20} />
+        </Tooltip>,
+      disabledPerson:
+        <Tooltip
+          label={getTranslation("process.modifiers.disabledPerson")}
+          withArrow
+        >
+          <MdOutlineAccessible color={color} size={20} />
+        </Tooltip>
+    }[name]
+  }
 
   return (
     <AppShell
@@ -72,6 +131,7 @@ export default function Home() {
           }}
         >
           <Group direction="column">
+            <Breadcrumbs separator={<BsChevronRight size={12} />}>{items}</Breadcrumbs>
             <Title order={3}>{getTranslation("dashboard.processesAwaiting.title")}</Title>
             <Text weight="600">{getTranslation("dashboard.processesAwaiting.explanation")}</Text>
             <Paper
@@ -84,6 +144,7 @@ export default function Home() {
                   <tr>
                     <th>{getTranslation("process.number")}</th>
                     <th>{getTranslation("process.type")}</th>
+                    <th>{getTranslation("process.modifiers")}</th>
                     <th>{getTranslation("process.originSector")}</th>
                     <th>{getTranslation("process.actualSector")}</th>
                     <th>{getTranslation("process.accessType")}</th>
@@ -96,7 +157,8 @@ export default function Home() {
                 <tbody>
                   <tr>
                     <td>2022-07.37895427</td>
-                    <td>{getTranslation("process.type.administrative")}</td>
+                    <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                    <td>{getModifier("oldPerson")}</td>
                     <td>Ocorrences</td>
                     <td>Ocorrences</td>
                     <td>{getTranslation("process.accessType.public")}</td>
@@ -115,7 +177,8 @@ export default function Home() {
                   </tr>
                   <tr>
                     <td>2022-07.37895427</td>
-                    <td>{getTranslation("process.type.administrative")}</td>
+                    <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                    <td>{getModifier("healthCondition")}</td>
                     <td>Ocorrences</td>
                     <td>Ocorrences</td>
                     <td>{getTranslation("process.accessType.public")}</td>
@@ -134,7 +197,8 @@ export default function Home() {
                   </tr>
                   <tr>
                     <td>2022-07.37895427</td>
-                    <td>{getTranslation("process.type.administrative")}</td>
+                    <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                    <td>{getModifier("lifeDanger")}</td>
                     <td>Ocorrences</td>
                     <td>Ocorrences</td>
                     <td>{getTranslation("process.accessType.public")}</td>
@@ -153,7 +217,8 @@ export default function Home() {
                   </tr>
                   <tr>
                     <td>2022-07.37895427</td>
-                    <td>{getTranslation("process.type.administrative")}</td>
+                    <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                    <td>{getModifier("priority")}</td>
                     <td>Ocorrences</td>
                     <td>Ocorrences</td>
                     <td>{getTranslation("process.accessType.public")}</td>
@@ -172,7 +237,8 @@ export default function Home() {
                   </tr>
                   <tr>
                     <td>2022-07.37895427</td>
-                    <td>{getTranslation("process.type.administrative")}</td>
+                    <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                    <td>{getModifier("disabledPerson")}</td>
                     <td>Ocorrences</td>
                     <td>Ocorrences</td>
                     <td>{getTranslation("process.accessType.public")}</td>
@@ -191,7 +257,8 @@ export default function Home() {
                   </tr>
                   <tr>
                     <td>2022-07.37895427</td>
-                    <td>{getTranslation("process.type.administrative")}</td>
+                    <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                    <td>{getTranslation("process.modifiers.noModifier")}</td>
                     <td>Ocorrences</td>
                     <td>Ocorrences</td>
                     <td>{getTranslation("process.accessType.public")}</td>
@@ -210,7 +277,8 @@ export default function Home() {
                   </tr>
                   <tr>
                     <td>2022-07.37895427</td>
-                    <td>{getTranslation("process.type.administrative")}</td>
+                    <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                    <td>{getTranslation("process.modifiers.noModifier")}</td>
                     <td>Ocorrences</td>
                     <td>Ocorrences</td>
                     <td>{getTranslation("process.accessType.public")}</td>
@@ -229,7 +297,8 @@ export default function Home() {
                   </tr>
                   <tr>
                     <td>2022-07.37895427</td>
-                    <td>{getTranslation("process.type.administrative")}</td>
+                    <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                    <td>{getTranslation("process.modifiers.noModifier")}</td>
                     <td>Ocorrences</td>
                     <td>Ocorrences</td>
                     <td>{getTranslation("process.accessType.public")}</td>
@@ -248,7 +317,8 @@ export default function Home() {
                   </tr>
                   <tr>
                     <td>2022-07.37895427</td>
-                    <td>{getTranslation("process.type.administrative")}</td>
+                    <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                    <td>{getTranslation("process.modifiers.noModifier")}</td>
                     <td>Ocorrences</td>
                     <td>Ocorrences</td>
                     <td>{getTranslation("process.accessType.public")}</td>
@@ -267,7 +337,8 @@ export default function Home() {
                   </tr>
                   <tr>
                     <td>2022-07.37895427</td>
-                    <td>{getTranslation("process.type.administrative")}</td>
+                    <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                    <td>{getTranslation("process.modifiers.noModifier")}</td>
                     <td>Ocorrences</td>
                     <td>Ocorrences</td>
                     <td>{getTranslation("process.accessType.public")}</td>
@@ -287,6 +358,7 @@ export default function Home() {
                 </tbody>
               </Table>
             </Paper>
+            <div style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}><Pagination total={3} radius="xl" /></div>
           </Group>
         </Paper>
       </Center>

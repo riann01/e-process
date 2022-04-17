@@ -1,6 +1,8 @@
 import Init from '../views/Init'
 import LangSelect from '../views/LangSelect'
 import Home from '../views/Home'
+import OrgSelect from '../views/OrgSelect'
+import Process from '../views/Process'
 import { MantineProvider } from '@mantine/core'
 import { useSelector } from 'react-redux'
 
@@ -19,7 +21,7 @@ export default function App() {
           xl: 1400,
         },
       }}>
-      <Home />
+      <Process />
     </MantineProvider>
   )
 }
