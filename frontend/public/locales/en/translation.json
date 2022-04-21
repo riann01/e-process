@@ -27,7 +27,7 @@
   "process.modifiers.disabledPerson": "Disabled Person",
   "process.originSector": "Origin Sector",
   "process.actualSector": "Actual Sector",
-  "process.accessType": "Access Type",
+  "process.accessType": "Access Level",
   "process.interestedParts": "Interested Parts",
   "process.creationDate": "Creation Date",
   "process.lastModifiedDate": "Last Modified",

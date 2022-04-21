@@ -95,7 +95,7 @@ export default function Home() {
 
   return (
     <AppShell
-      padding="md"
+      padding={0}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
       fixed
