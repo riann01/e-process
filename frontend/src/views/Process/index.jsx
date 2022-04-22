@@ -34,6 +34,7 @@ import { useTranslation } from "react-i18next"
 import MainLink from "./components/MainLink"
 import navbarContent from "./navbarContent"
 import { UserSection } from "./components/UserSection"
+import ProcessTimeline from "./components/ProcessTimeline"
 
 export default function Home() {
 
@@ -152,22 +153,29 @@ export default function Home() {
           radius="md"
           shadow="xl"
           sx={{
-            minWidth: "95%",
-            minHeight: "95%",
+            minWidth: "98%",
+            minHeight: "98%",
             padding: "20px"
           }}
         >
-          <Group direction="column">
-            <Title order={3}>{getTranslation("process.label")} 2022-07.37895427 <Badge color="teal">{getTranslation("process.type.administrative")}</Badge></Title>
-          </Group>
-          <Group direction="row">
-            <Group direction="column">
-              <Text weight="600">{getTranslation("process.interestedParts")}</Text>
-              <Text>Fulano x Fulana</Text>
+          <Group style={{ width: "100%" }}>
+            <Group direction="column" sx={{ width: "75%", height: "100%" }}>
+              <Group direction="column">
+                <Title order={3}>{getTranslation("process.label")} 2022-07.37895427 <Badge color="teal">{getTranslation("process.type.administrative")}</Badge></Title>
+              </Group>
+              <Group direction="row">
+                <Group direction="column">
+                  <Text weight="600">{getTranslation("process.interestedParts")}</Text>
+                  <Text>Fulano x Fulana</Text>
+                </Group>
+                <Group direction="column">
+                  <Text weight="600">{getTranslation("process.accessType")}</Text>
+                  <Text><Badge color="red">{getTranslation("process.accessType.restricted")}</Badge></Text>
+                </Group>
+              </Group>
             </Group>
-            <Group direction="column">
-              <Text weight="600">{getTranslation("process.accessType")}</Text>
-              <Text><Badge color="red">{getTranslation("process.accessType.restricted")}</Badge></Text>
+            <Group sx={{ width: "23%", height: "100%" }}>
+              <ProcessTimeline />
             </Group>
           </Group>
         </Paper>

@@ -8,13 +8,16 @@ import {
   Text,
   Container,
   Group,
-  Button
+  Button,
+  Notification,
+  useMantineTheme
 } from "@mantine/core"
 import { AiFillInfoCircle } from 'react-icons/ai'
 import { ImDatabase } from "react-icons/im"
 import { FaServer } from "react-icons/fa"
 
 export default function Int() {
+  const theme = useMantineTheme()
   const currentOs = useOs()
   const [progress, setProgress] = useState(0)
 
@@ -22,10 +25,15 @@ export default function Int() {
     setProgress(progress + 1)
   }, 500)
 
-  if(progress === 100) clearTimeout(timeout)
+  if (progress === 100) clearTimeout(timeout)
 
   return (
-    <Center style={{ width: "100vw", height: "100vh" }}>
+    <Center
+      style={{
+        width: "100vw",
+        height: "100vh",
+        backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.dark[0], 
+      }}>
       <Transition mounted={true} transition="fade" duration={1000} timingFunction="ease">
         {() => (
           <Paper
@@ -38,51 +46,43 @@ export default function Int() {
             })}
           >
             <Container style={{ display: "flex", gap: "5%", marginBottom: "30px" }}>
-              <AiFillInfoCircle size={25} color="#FFF"/>
+              <AiFillInfoCircle size={25} color="#FFF" />
               <Text weight="bold">Configuração inicial do e-Process</Text>
             </Container>
             <Container style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+
               <Group direction="column" spacing="md"
                 sx={(theme) => ({
                   minWidth: "100%",
                   gap: "20px"
                 })}
               >
-                <Container
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: "2%",
-                    width: "100%",
-                    backgroundColor: "rgb(0,0,0,0.6)",
-                    borderRadius: "2%",
-                    padding: "5%"
-                  }}>
-                  <ImDatabase size={25} color="#FFF" />
-                  <Text>PostgreSQL 12 (linux x64) 172.472.6.8:5871</Text>
-                </Container>
-                <Container
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: "2%",
-                    width: "100%",
-                    backgroundColor: "rgb(0,0,0,0.6)",
-                    borderRadius: "2%",
-                    padding: "5%"
-                  }}
+                <Notification
+                  disallowClose
+                  icon={<ImDatabase size={25} color="#FFF" />}
+                  color="dark"
+                  title="Banco de Dados"
+                  sx={{ width: "100%" }}  
                 >
-                  <FaServer size={25} color="#FFF" />
+                  <Text>PostgreSQL 12 (linux x64) 172.472.6.8:5871</Text>
+                </Notification>
+                <Notification
+                  disallowClose
+                  icon={<FaServer size={25} color="#FFF" />}
+                  color="dark"
+                  title="Servidor"
+                  sx={{ width: "100%" }}
+                >
                   <Text>Server (linux x64) 172.472.6.8:4657</Text>
-                </Container>
+                </Notification>
               </Group>
               <Text>OS do Cliente: {currentOs}</Text>
               <Text>Relizando conexão...</Text>
-              <Progress value={progress}/>
+              <Progress value={progress} />
               <Text align="right">{progress}%</Text>
               <Button sx={() => ({ marginBottom: "20px" })} disabled={progress !== 100}>Prosseguir</Button>
             </Container>
-          </Paper>  
+          </Paper>
         )}
       </Transition>
     </Center>

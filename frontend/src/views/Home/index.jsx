@@ -28,7 +28,7 @@ import { BsFillArrowRightCircleFill } from "react-icons/bs"
 import { MdElderly, MdOutlineAccessible } from "react-icons/md"
 import { GiHealthNormal, GiLifeTap } from "react-icons/gi"
 import { BsChevronRight } from "react-icons/bs"
-import { FaArrowCircleUp } from "react-icons/fa"
+import { FaArrowCircleUp, FaExclamationCircle } from "react-icons/fa"
 import { useTranslation } from "react-i18next"
 import MainLink from "./components/MainLink"
 import navbarContent from "./navbarContent"
@@ -151,8 +151,8 @@ export default function Home() {
           radius="md"
           shadow="xl"
           sx={{
-            minWidth: "95%",
-            minHeight: "95%",
+            minWidth: "99%",
+            minHeight: "98%",
             padding: "20px"
           }}
         >
@@ -160,6 +160,7 @@ export default function Home() {
             <Breadcrumbs separator={<BsChevronRight size={12} />}>{items}</Breadcrumbs>
             <Title order={3}>{getTranslation("dashboard.processesAwaiting.title")}</Title>
             <Text weight="600">{getTranslation("dashboard.processesAwaiting.explanation")}</Text>
+
             <Paper
               withBorder
               radius="md"
@@ -171,6 +172,7 @@ export default function Home() {
                     <tr>
                       <th>{getTranslation("process.number")}</th>
                       <th>{getTranslation("process.type")}</th>
+                      <th>{getTranslation("process.deadline")}</th>
                       <th>{getTranslation("process.modifiers")}</th>
                       <th>{getTranslation("process.originSector")}</th>
                       <th>{getTranslation("process.actualSector")}</th>
@@ -185,6 +187,7 @@ export default function Home() {
                     <tr>
                       <td>2022-07.37895427</td>
                       <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                      <td>No deadline</td>
                       <td>{getModifier("oldPerson")}</td>
                       <td>Ocorrences</td>
                       <td>Ocorrences</td>
@@ -205,6 +208,18 @@ export default function Home() {
                     <tr>
                       <td>2022-07.37895427</td>
                       <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                      <td>
+                        {new Date(new Date().setDate(new Date().getDate() + 4)).toDateString()} (4 days)
+                        <Tooltip
+                          label={getTranslation("process.deadline.icon.warning")}
+                          withArrow
+                        >
+                          <FaExclamationCircle
+                            size={15}
+                            color={theme.colors.red[5]}
+                          />
+                        </Tooltip>
+                      </td>
                       <td>{getModifier("healthCondition")}</td>
                       <td>Ocorrences</td>
                       <td>Ocorrences</td>
@@ -225,6 +240,7 @@ export default function Home() {
                     <tr>
                       <td>2022-07.37895427</td>
                       <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                      <td>No deadline</td>
                       <td>{getModifier("lifeDanger")}</td>
                       <td>Ocorrences</td>
                       <td>Ocorrences</td>
@@ -245,6 +261,18 @@ export default function Home() {
                     <tr>
                       <td>2022-07.37895427</td>
                       <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                      <td>
+                        {new Date(new Date().setDate(new Date().getDate() + 4)).toDateString()} (4 days)
+                        <Tooltip
+                          label={getTranslation("process.deadline.icon.warning")}
+                          withArrow
+                        >
+                          <FaExclamationCircle
+                            size={15}
+                            color={theme.colors.red[5]}
+                          />
+                        </Tooltip>
+                      </td>
                       <td>{getModifier("priority")}</td>
                       <td>Ocorrences</td>
                       <td>Ocorrences</td>
@@ -265,6 +293,7 @@ export default function Home() {
                     <tr>
                       <td>2022-07.37895427</td>
                       <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                      <td>No deadline</td>
                       <td>{getModifier("disabledPerson")}</td>
                       <td>Ocorrences</td>
                       <td>Ocorrences</td>
@@ -285,6 +314,18 @@ export default function Home() {
                     <tr>
                       <td>2022-07.37895427</td>
                       <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                      <td>
+                        {new Date(new Date().setDate(new Date().getDate() + 4)).toDateString()} (4 days)
+                        <Tooltip
+                          label={getTranslation("process.deadline.icon.warning")}
+                          withArrow
+                        >
+                          <FaExclamationCircle
+                            size={15}
+                            color={theme.colors.red[5]}
+                          />
+                        </Tooltip>
+                      </td>
                       <td>{getTranslation("process.modifiers.noModifier")}</td>
                       <td>Ocorrences</td>
                       <td>Ocorrences</td>
@@ -305,6 +346,7 @@ export default function Home() {
                     <tr>
                       <td>2022-07.37895427</td>
                       <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                      <td>No deadline</td>
                       <td>{getTranslation("process.modifiers.noModifier")}</td>
                       <td>Ocorrences</td>
                       <td>Ocorrences</td>
@@ -325,6 +367,18 @@ export default function Home() {
                     <tr>
                       <td>2022-07.37895427</td>
                       <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                      <td>
+                        {new Date(new Date().setDate(new Date().getDate() + 4)).toDateString()} (4 days)
+                        <Tooltip
+                          label={getTranslation("process.deadline.icon.warning")}
+                          withArrow
+                        >
+                          <FaExclamationCircle
+                            size={15}
+                            color={theme.colors.red[5]}
+                          />
+                        </Tooltip>
+                      </td>
                       <td>{getTranslation("process.modifiers.noModifier")}</td>
                       <td>Ocorrences</td>
                       <td>Ocorrences</td>
@@ -345,6 +399,7 @@ export default function Home() {
                     <tr>
                       <td>2022-07.37895427</td>
                       <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                      <td>No deadline</td>
                       <td>{getTranslation("process.modifiers.noModifier")}</td>
                       <td>Ocorrences</td>
                       <td>Ocorrences</td>
@@ -365,6 +420,18 @@ export default function Home() {
                     <tr>
                       <td>2022-07.37895427</td>
                       <td><Badge color="teal">{getTranslation("process.type.administrative")}</Badge></td>
+                      <td>
+                        {new Date(new Date().setDate(new Date().getDate() + 4)).toDateString()} (4 days)
+                        <Tooltip
+                          label={getTranslation("process.deadline.icon.warning")}
+                          withArrow
+                        >
+                          <FaExclamationCircle
+                            size={15}
+                            color={theme.colors.red[5]}
+                          />
+                        </Tooltip>
+                      </td>
                       <td>{getTranslation("process.modifiers.noModifier")}</td>
                       <td>Ocorrences</td>
                       <td>Ocorrences</td>
