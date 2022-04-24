@@ -21,7 +21,7 @@ export default function App() {
           xl: 1400,
         },
       }}>
-      <Init />
+      <Process />
     </MantineProvider>
   )
 }
