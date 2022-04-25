@@ -45,6 +45,11 @@
   "orgs.type.court": "Tribunal de Justicia",
   "orgs.type.publicService": "Servicio Publico",
   "orgs.type.privateOrganization": "Organización Privada",
-  "orgs.type.personalized": "Costumbre"
-  
+  "orgs.type.personalized": "Costumbre",
+  "pdf.viewer.rotateLeft": "Gire a la Izquierda",
+  "pdf.viewer.rotateRight": "Gire a la Derecha",
+  "pdf.viewer.zoomIn": "Acercarse",
+  "pdf.viewer.zoomOut": "Trasladarse",
+  "pdf.viewer.lastPage": "Pagina Anterior",
+  "pdf.viewer.nextPage": "Siguiente Página"
 }

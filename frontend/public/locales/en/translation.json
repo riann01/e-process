@@ -45,5 +45,11 @@
   "orgs.type.court": "Court of Justice",
   "orgs.type.publicService": "Public Service",
   "orgs.type.privateOrganization": "Private Organization",
-  "orgs.type.personalized": "Personalized"
+  "orgs.type.personalized": "Personalized",
+  "pdf.viewer.rotateLeft": "Rotate Left",
+  "pdf.viewer.rotateRight": "Rotate Right",
+  "pdf.viewer.zoomIn": "Zoom In",
+  "pdf.viewer.zoomOut": "Zoom Out",
+  "pdf.viewer.lastPage": "Last Page",
+  "pdf.viewer.nextPage": "Next Page"
 }

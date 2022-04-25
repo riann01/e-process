@@ -26,12 +26,11 @@ import {
   ScrollArea
 } from "@mantine/core"
 import { useMediaQuery } from "@mantine/hooks"
-import { Document, Page } from 'react-pdf'
 import { AiFillStar, AiOutlineStar } from "react-icons/ai"
-import { BsFillArrowRightCircleFill } from "react-icons/bs"
 import { MdElderly, MdOutlineAccessible, MdDarkMode, MdLightMode } from "react-icons/md"
 import { GiHealthNormal, GiLifeTap } from "react-icons/gi"
 import { BsChevronRight, BsChevronDown } from "react-icons/bs"
+import { BiRotateLeft, BiRotateRight } from "react-icons/bi"
 import { FaArrowCircleUp } from "react-icons/fa"
 import { FiDownloadCloud, FiEdit3 } from "react-icons/fi"
 import { VscNewFile } from "react-icons/vsc"
@@ -41,10 +40,9 @@ import navbarContent from "./navbarContent"
 import { UserSection } from "./components/UserSection"
 import ProcessTimeline from "./components/ProcessTimeline"
 
-import './pdfConfig'
-import pdf from "../../assets/6039-21274-1-PB.pdf"
 import { useDispatch, useSelector } from "react-redux"
 import { setColorScheme } from "../../app/redux/actions/colorScheme/colorScheme"
+import PdfViewer from "../../app/components/PdfViewer"
 
 export default function Home() {
 
@@ -302,27 +300,7 @@ export default function Home() {
                   </Group>
                 </Paper>
               </Group>
-              <Paper
-                withBorder
-                radius="md"
-                sx={{
-                  width: "100%",
-                  maxHeight: "600px",
-                  display: "flex", justifyContent: "center", alignItems: "center"
-                }}
-              >
-                <ScrollArea
-
-                  sx={{ flexGrow: 100, width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}
-                >
-                  <Document
-                    file={pdf}
-                    onLoadSuccess={onDocumentLoadSuccess}
-                  >
-                    <Page renderMode="svg" pageNumber={pageNumber} />
-                  </Document>
-                </ScrollArea>
-              </Paper>
+              <PdfViewer />
             </Group>
             <Group sx={{ width: "23%", height: "100%" }}>
               <ProcessTimeline />
