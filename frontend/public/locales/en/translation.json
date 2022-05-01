@@ -19,7 +19,8 @@
   "process.button.addFiles": "Add Files",
   "process.button.favorite": "Favorite",
   "process.button.unfavorite": "Unfavorite",
-  "process.timeline.title": "Process Timeline",
+  "process.timeline.title": "Timeline",
+  "process.files.tree.title": "Files",
   "process.label": "Process",
   "process.access.btnLabel": "Access",
   "process.number": "Process Number",
@@ -51,5 +52,6 @@
   "pdf.viewer.zoomIn": "Zoom In",
   "pdf.viewer.zoomOut": "Zoom Out",
   "pdf.viewer.lastPage": "Last Page",
-  "pdf.viewer.nextPage": "Next Page"
+  "pdf.viewer.nextPage": "Next Page",
+  "pdf.viewer.downloadDocument": "Download Document"
 }

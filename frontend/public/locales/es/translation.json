@@ -21,6 +21,7 @@
   "process.button.unfavorite": "Eliminar Favorito",
   "process.label": "Proceso",
   "process.timeline.title": "Linea del Tiempo",
+  "process.files.tree.title": "Archivos",
   "process.access.btnLabel": "Accesar",
   "process.number": "Número de Processo",
   "process.type": "Tipo",
@@ -51,5 +52,7 @@
   "pdf.viewer.zoomIn": "Acercarse",
   "pdf.viewer.zoomOut": "Trasladarse",
   "pdf.viewer.lastPage": "Pagina Anterior",
-  "pdf.viewer.nextPage": "Siguiente Página"
+  "pdf.viewer.nextPage": "Siguiente Página",
+  "pdf.viewer.downloadDocument": "Descargar documento"
+
 }

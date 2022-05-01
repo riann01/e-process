@@ -20,6 +20,7 @@ export default function Int() {
   const theme = useMantineTheme()
   const currentOs = useOs()
   const [progress, setProgress] = useState(0)
+  const color = theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black
 
   const timeout = setTimeout(() => {
     setProgress(progress + 1)
@@ -46,7 +47,7 @@ export default function Int() {
             })}
           >
             <Container style={{ display: "flex", gap: "5%", marginBottom: "30px" }}>
-              <AiFillInfoCircle size={25} color="#FFF" />
+              <AiFillInfoCircle size={25} color={color} />
               <Text weight="bold">Configuração inicial do e-Process</Text>
             </Container>
             <Container style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
@@ -59,19 +60,19 @@ export default function Int() {
               >
                 <Notification
                   disallowClose
-                  icon={<ImDatabase size={25} color="#FFF" />}
+                  icon={<ImDatabase size={25} color={color} />}
                   color="dark"
                   title="Banco de Dados"
-                  sx={{ width: "100%" }}  
+                  sx={{ width: "100%", boxShadow: "none" }}  
                 >
                   <Text>PostgreSQL 12 (linux x64) 172.472.6.8:5871</Text>
                 </Notification>
                 <Notification
                   disallowClose
-                  icon={<FaServer size={25} color="#FFF" />}
+                  icon={<FaServer size={25} color={color} />}
                   color="dark"
                   title="Servidor"
-                  sx={{ width: "100%" }}
+                  sx={{ width: "100%", boxShadow: "none"  }}
                 >
                   <Text>Server (linux x64) 172.472.6.8:4657</Text>
                 </Notification>

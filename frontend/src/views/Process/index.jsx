@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import {
   AppShell,
   Container,
@@ -23,16 +23,20 @@ import {
   Burger,
   useMantineTheme,
   Transition,
+  Menu,
+  Divider,
   ScrollArea
 } from "@mantine/core"
-import { useMediaQuery } from "@mantine/hooks"
-import { AiFillStar, AiOutlineStar } from "react-icons/ai"
+import { useDisclosure, useMediaQuery } from "@mantine/hooks"
+import { AiFillStar, AiOutlineStar, AiFillMessage } from "react-icons/ai"
 import { MdElderly, MdOutlineAccessible, MdDarkMode, MdLightMode } from "react-icons/md"
 import { GiHealthNormal, GiLifeTap } from "react-icons/gi"
 import { BsChevronRight, BsChevronDown } from "react-icons/bs"
-import { BiRotateLeft, BiRotateRight } from "react-icons/bi"
-import { FaArrowCircleUp } from "react-icons/fa"
-import { FiDownloadCloud, FiEdit3 } from "react-icons/fi"
+import { BiRotateLeft, BiRotateRight, BiTransferAlt } from "react-icons/bi"
+import { FaArrowCircleUp, FaTrashAlt } from "react-icons/fa"
+import { FiDownloadCloud, FiEdit3, FiSearch } from "react-icons/fi"
+import { MdInsertPhoto } from "react-icons/md"
+import { IoSettingsSharp } from "react-icons/io5"
 import { VscNewFile } from "react-icons/vsc"
 import { useTranslation } from "react-i18next"
 import MainLink from "./components/MainLink"
@@ -54,6 +58,7 @@ export default function Home() {
   const [navbarTarget, setNavbarTarget] = useState({})
   const [favorite, setFavorite] = useState(false)
   const [pageNumber, setPageNumber] = useState(1)
+  const [openMenu, setOpenMenu] = useState(false)
   const smallScreen = useMediaQuery('(min-width: 800px)')
 
   const items = [
@@ -116,6 +121,66 @@ export default function Home() {
     dispatch(setColorScheme(colorScheme === "dark" ? "light" : "dark"))
   }
 
+  const getProcessControls = () => (
+    <Paper
+      withBorder
+      radius="md"
+      sx={{
+        padding: "7px"
+      }}
+    >
+      <ScrollArea>
+        <Group direction="row">
+          <Tooltip
+            label={getTranslation("process.button.download")}
+            position="bottom"
+            withArrow
+          >
+            <ActionIcon size="lg" radius="100%">
+              <FiDownloadCloud size={20} color={theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black} />
+            </ActionIcon>
+          </Tooltip>
+          <Tooltip
+            label={getTranslation("process.button.edit")}
+            position="bottom"
+            withArrow
+          >
+            <ActionIcon size="lg" radius="100%">
+              <FiEdit3 size={20} color={theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black} />
+            </ActionIcon>
+          </Tooltip>
+          <Tooltip
+            label={getTranslation("process.button.addFiles")}
+            position="bottom"
+            withArrow
+          >
+            <ActionIcon size="lg" radius="100%">
+              <VscNewFile size={20} color={theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black} />
+            </ActionIcon>
+          </Tooltip>
+          <Tooltip
+            label={favorite ? getTranslation("process.button.unfavorite") : getTranslation("process.button.favorite")}
+            position="bottom"
+            withArrow
+          >
+            <ActionIcon
+              size="lg"
+              radius="100%"
+              onClick={() => handleFavorite()}
+            >
+              {favorite ?
+                <AiFillStar size={20} color="#FAD500" /> :
+                <AiOutlineStar
+                  size={20}
+                  color={theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black}
+                />}
+            </ActionIcon>
+          </Tooltip>
+        </Group>
+      </ScrollArea>
+    </Paper>
+  )
+
   return (
     <AppShell
       padding={0}
@@ -137,7 +202,7 @@ export default function Home() {
               color={theme.colors.gray[6]}
               mr="xl"
             />
-            <Text>e-Process</Text>
+            {!smallScreen && getProcessControls()}
           </div>
         </Header>
       }
@@ -204,81 +269,47 @@ export default function Home() {
           }}
         >
           <Group style={{ width: "100%" }}>
-            <Group direction="column" sx={{ width: "75%", height: "100%" }}>
+            <Group direction="column" sx={{ width: !smallScreen ? "100%" : "75%", height: "100%" }}>
               <Group direction="row">
-                <Group
-                  direction="column"
-                  sx={{
-                    borderRadius: "7px",
-                    padding: "10px",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    cursor: "pointer",
-                    "&:hover": {
-                      backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[0],
-                      transition: "background-color .1s ease-in-out"
-                    }
-                  }}
+                <Menu
+                  control={
+                    <Group
+                      onClick={() => setOpenMenu(!openMenu)}
+                      direction="column"
+                      sx={{
+                        borderRadius: "7px",
+                        padding: "10px",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        cursor: "pointer",
+                        "&:hover": {
+                          backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[0],
+                          transition: "background-color .1s ease-in-out"
+                        }
+                      }}
+                    >
+                      <Title order={3}>{getTranslation("process.label")} 2022-07.37895427</Title>
+                      <Badge color="teal">{getTranslation("process.type.administrative")}</Badge>
+                      <BsChevronDown color={theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black} size={20} />
+                    </Group>
+                  }
                 >
-                  <Title order={3}>{getTranslation("process.label")} 2022-07.37895427</Title>
-                  <Badge color="teal">{getTranslation("process.type.administrative")}</Badge>
-                  <BsChevronDown color={theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black} size={20} />
-                </Group>
-                <Paper
-                  withBorder
-                  radius="md"
-                  sx={{
-                    padding: "7px"
-                  }}
-                >
-                  <Group direction="row">
-                    <Tooltip
-                      label={getTranslation("process.button.download")}
-                      position="bottom"
-                      withArrow
-                    >
-                      <ActionIcon size="lg" radius="100%">
-                        <FiDownloadCloud size={20} color={theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black} />
-                      </ActionIcon>
-                    </Tooltip>
-                    <Tooltip
-                      label={getTranslation("process.button.edit")}
-                      position="bottom"
-                      withArrow
-                    >
-                      <ActionIcon size="lg" radius="100%">
-                        <FiEdit3 size={20} color={theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black} />
-                      </ActionIcon>
-                    </Tooltip>
-                    <Tooltip
-                      label={getTranslation("process.button.addFiles")}
-                      position="bottom"
-                      withArrow
-                    >
-                      <ActionIcon size="lg" radius="100%">
-                        <VscNewFile size={20} color={theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black} />
-                      </ActionIcon>
-                    </Tooltip>
-                    <Tooltip
-                      label={favorite ? getTranslation("process.button.unfavorite") : getTranslation("process.button.favorite")}
-                      position="bottom"
-                      withArrow
-                    >
-                      <ActionIcon
-                        size="lg"
-                        radius="100%"
-                        onClick={() => handleFavorite()}
-                      >
-                        {favorite ?
-                          <AiFillStar size={20} color="#FAD500" /> :
-                          <AiOutlineStar
-                            size={20}
-                            color={theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black}
-                          />}
-                      </ActionIcon>
-                    </Tooltip>
-                  </Group>
-                </Paper>
+                  <Menu.Label>{getTranslation("process.label")}</Menu.Label>
+                  <Menu.Item icon={<IoSettingsSharp size={14} />}>Settings</Menu.Item>
+                  <Menu.Item icon={<AiFillMessage size={14} />}>Messages</Menu.Item>
+                  <Menu.Item icon={<MdInsertPhoto size={14} />}>Gallery</Menu.Item>
+                  <Menu.Item
+                    icon={<FiSearch size={14} />}
+                    rightSection={<Text size="xs" color="dimmed">⌘K</Text>}
+                  >
+                    Search
+                  </Menu.Item>
+                  <Divider />
+                  <Menu.Label>Danger zone</Menu.Label>
+                  <Menu.Item icon={<BiTransferAlt size={14} />}>Transfer my data</Menu.Item>
+                  <Menu.Item color="red" icon={<FaTrashAlt size={14} />}>Delete my account</Menu.Item>
+                </Menu>
+                {smallScreen && getProcessControls()}
               </Group>
               <Group>
                 <Paper
@@ -302,7 +333,7 @@ export default function Home() {
               </Group>
               <PdfViewer />
             </Group>
-            <Group sx={{ width: "23%", height: "100%" }}>
+            <Group sx={{ width: !smallScreen ? "100%" : "23%", height: "100%" }}>
               <ProcessTimeline />
             </Group>
           </Group>

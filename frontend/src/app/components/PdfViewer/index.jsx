@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next"
 import { AiOutlineZoomIn, AiOutlineZoomOut } from "react-icons/ai"
 import { BiRotateRight, BiRotateLeft } from "react-icons/bi"
 import { BsArrowRightCircleFill, BsArrowLeftCircleFill, BsBorderStyle } from "react-icons/bs"
+import { FiDownload } from "react-icons/fi"
 import pdf from "../../../assets/6039-21274-1-PB.pdf"
 import './pdfConfig'
 
@@ -38,7 +39,7 @@ export default function PdfViewer({ document }) {
   }
 
   const rotateLeft = () => {
-    if(rotation === 0) {
+    if (rotation === 0) {
       setRotation(270)
       return
     }
@@ -46,7 +47,7 @@ export default function PdfViewer({ document }) {
   }
 
   const rotateRight = () => {
-    if(rotation === 270) {
+    if (rotation === 270) {
       setRotation(0)
       return
     }
@@ -54,14 +55,14 @@ export default function PdfViewer({ document }) {
   }
 
   const increaseScale = () => {
-    if(scale + 0.2 >= 2)
-    return
+    if (scale + 0.2 >= 2)
+      return
     setScale(scale + 0.1)
   }
 
   const decreaseScale = () => {
-    if(scale - 0.2 <= 1)
-    return
+    if (scale - 0.2 <= 1)
+      return
     setScale(scale - 0.1)
   }
 
@@ -141,6 +142,17 @@ export default function PdfViewer({ document }) {
             onClick={() => decreaseScale()}
           >
             <AiOutlineZoomOut size={20} color={color} />
+          </ActionIcon>
+        </Tooltip>
+        <Tooltip
+          label={getTranslation("pdf.viewer.downloadDocument")}
+          position="bottom"
+        >
+          <ActionIcon
+            size="lg"
+            radius="100%"
+          >
+            <FiDownload size={20} color={color} />
           </ActionIcon>
         </Tooltip>
         <Group direction="row">
